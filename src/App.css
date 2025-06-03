@@ -30,7 +30,10 @@ button:hover {
 }
 
 .habits-list-container {
-	display: flex;
-	align-items: center;
-	gap: 10px;
+  display: flex;
+  flex-direction: column; /* Stack habit cards vertically */
+  align-items: center; /* Center cards horizontally */
+  width: 100%; /* Take full width of parent */
+  max-width: 600px; /* Limit overall width */
+  margin-top: 20px; /* Space from the H1 */
 }

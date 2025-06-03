@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 
-import HabitTracker from "./HabitTracker";
+import HabitTracker from "./components/HabitTracker/HabitTracker";
 
 interface Habit {
 	id: string;
