@@ -1,0 +1,54 @@
+.habit-card {
+	background-color: white;
+	border-radius: 8px;
+	padding: 20px;
+	margin: 15px 0;
+	width: 90%;
+	height: 100%;
+	max-width: 400px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.habit-info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	/* Pushes habit name and indicator to ends */
+	width: 100%;
+}
+
+.habit-info h2 {
+	margin: 0;
+	/* Remove default h2 margin */
+	color: #333;
+	font-size: 1.5em;
+}
+
+.status-indicator {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	/* Makes it a circle */
+	border: 2px solid #ccc;
+	/* Default border */
+}
+
+.status-indicator.completed {
+	background-color: #28a745;
+	/* Green for completed */
+	border-color: #28a745;
+}
+
+.status-indicator.not-completed {
+	background-color: #dc3545;
+	/* Red for not completed */
+	border-color: #dc3545;
+}
+
+.action-buttons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
