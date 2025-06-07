@@ -9,6 +9,27 @@
 	box-sizing: border-box;
 }
 
+.date-navigation {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	/* Space between buttons and date text */
+	margin-bottom: 25px;
+	background-color: #e9ecef;
+	padding: 10px 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.date-navigation h2 {
+  margin: 0; /* Remove default margin from h2 */
+  font-size: 1.6em;
+  color: #343a40;
+  min-width: 280px; /* Give enough space for long date formats */
+  text-align: center;
+}
+
+
 /* Styles for buttons */
 button {
 	background-color: #007bff;
@@ -30,10 +51,15 @@ button:hover {
 }
 
 .habits-list-container {
-  display: flex;
-  flex-direction: column; /* Stack habit cards vertically */
-  align-items: center; /* Center cards horizontally */
-  width: 100%; /* Take full width of parent */
-  max-width: 600px; /* Limit overall width */
-  margin-top: 20px; /* Space from the H1 */
+	display: flex;
+	flex-direction: column;
+	/* Stack habit cards vertically */
+	align-items: center;
+	/* Center cards horizontally */
+	width: 100%;
+	/* Take full width of parent */
+	max-width: 600px;
+	/* Limit overall width */
+	margin-top: 20px;
+	/* Space from the H1 */
 }

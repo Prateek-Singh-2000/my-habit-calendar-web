@@ -2,41 +2,77 @@ import { useState } from "react";
 import "./App.css";
 
 import HabitTracker from "./components/HabitTracker/HabitTracker";
-
-interface Habit {
-	id: string;
-	name: string;
-	isCompleted: boolean;
-}
+import type { Habit, HabitTracking } from "./types";
+import {
+	formatDate,
+	getTomorrow,
+	getYesterday,
+	getDisplayDate,
+} from "./utils/dateUtils";
 
 function App() {
-	const [habits, setHabit] = useState<Habit[]>([
-		{ id: "1", name: "Drink 8 glasses of water", isCompleted: false },
-		{ id: "2", name: "Running a km", isCompleted: false },
-		{ id: "3", name: "Programming an app", isCompleted: false },
+	const [habits] = useState<Habit[]>([
+		{ id: "1", name: "Drink 8 glasses of water" },
+		{ id: "2", name: "Running a km" },
+		{ id: "3", name: "Programming an app" },
 	]);
 
-	function settingStateHabit(id: string, changedStatusHabit: boolean) {
-		setHabit((prevHabits) => {
-			// Map over the previous habits array to find and update the specific habit
-			return prevHabits.map((habit) =>
-				habit.id === id ? { ...habit, isCompleted: changedStatusHabit } : habit,
-			);
+	// 2. Set state for current user for all days their habits are tracked
+	const [habitStorage, setHabitTracking] = useState<HabitTracking>({});
+
+	// 3. State for the currently viewed day (initialized to today)
+	const [currentViewedDay, setCurrentViewedDay] = useState<Date>(new Date());
+
+	const toggleHabitStatus = (habitId: string, changedStatus: boolean): void => {
+		const currentDate = formatDate(currentViewedDay);
+
+		setHabitTracking((prevStatus) => {
+			const currentHabitStatus = habitStorage[currentDate] || {};
+			return {
+				...prevStatus,
+				[currentDate]: {
+					...currentHabitStatus,
+					[habitId]: changedStatus,
+				},
+			};
 		});
-	}
+	};
+
+	const setNextDate = (): void => {
+		setCurrentViewedDay((prevDay) => getTomorrow(prevDay));
+	};
+
+	const setPreviousDate = (): void => {
+		setCurrentViewedDay((prevDay) => getYesterday(prevDay));
+	};
+
+	const getHabitCompletionStatus = (habitId: string): boolean => {
+		const currentDate = formatDate(currentViewedDay);
+		return habitStorage[currentDate]?.[habitId] || false;
+	};
 
 	return (
 		<div className="app-container">
 			<h1>Daily Habit Tracker</h1>
+
+			<div className="date-navigation">
+				<h2>{getDisplayDate(currentViewedDay)}</h2>
+				<button className="forward-date" onClick={setNextDate}>
+					Next day
+				</button>
+				<button className="previous-date" onClick={setPreviousDate}>
+					Previous Day
+				</button>
+			</div>
+
 			<div className="habits-list-container">
 				{habits.map((habit) => (
 					<HabitTracker
-						key={habit.id}
 						habitName={habit.name}
-						isCompleted={habit.isCompleted}
-						onMarkCompleted={() => settingStateHabit(habit.id, true)}
-						onMarkNotCompleted={() => settingStateHabit(habit.id, false)}
-					/>
+						isCompleted={getHabitCompletionStatus(habit.id)}
+						onMarkCompleted={() => toggleHabitStatus(habit.id, true)}
+						onMarkNotCompleted={() => toggleHabitStatus(habit.id, false)}
+					></HabitTracker>
 				))}
 			</div>
 		</div>
