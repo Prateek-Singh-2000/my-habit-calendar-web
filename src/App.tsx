@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 
 import HabitTracker from "./components/HabitTracker/HabitTracker";
+import HabitAdderModal from "./components/HabitAdder/HabitAdder";
 import type { Habit, HabitTracking } from "./types";
 import {
 	formatDate,
@@ -11,10 +12,8 @@ import {
 } from "./utils/dateUtils";
 
 function App() {
-	const [habits] = useState<Habit[]>([
+	const [habits, setHabit] = useState<Habit[]>([
 		{ id: "1", name: "Drink 8 glasses of water" },
-		{ id: "2", name: "Running a km" },
-		{ id: "3", name: "Programming an app" },
 	]);
 
 	// 2. Set state for current user for all days their habits are tracked
@@ -22,6 +21,27 @@ function App() {
 
 	// 3. State for the currently viewed day (initialized to today)
 	const [currentViewedDay, setCurrentViewedDay] = useState<Date>(new Date());
+
+	// 4. State for Habit Adding modal
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+	const toggleModalButton = (isOpen: boolean): void => {
+		console.log(`Trieggered modal to change to ${isOpen}`);
+		setIsModalOpen(isOpen);
+	};
+
+	const addHabit = (habitName: string): void => {
+		if (habitName.trim() === "") {
+			alert("Please Enter valid habit name");
+			return;
+		}
+
+		const newId: string = `h${habits.length + 1}`;
+		const newHabit: Habit = { id: newId, name: habitName };
+
+		setHabit((prev) => [...prev, newHabit]);
+		setIsModalOpen(false);
+	};
 
 	const toggleHabitStatus = (habitId: string, changedStatus: boolean): void => {
 		const currentDate = formatDate(currentViewedDay);
@@ -74,6 +94,19 @@ function App() {
 						onMarkNotCompleted={() => toggleHabitStatus(habit.id, false)}
 					></HabitTracker>
 				))}
+			</div>
+
+			<button className="add-habit-btn" onClick={() => toggleModalButton(true)}>
+				+
+			</button>
+
+			<div className="modal-container">
+				{isModalOpen && (
+					<HabitAdderModal
+						habitAddingFunction={addHabit}
+						onClose={() => toggleModalButton(false)}
+					/>
+				)}
 			</div>
 		</div>
 	);
