@@ -1,17 +1,13 @@
 import "./HabitTracker.css";
-
-interface HabitTrackerProps {
-	habitName: string;
-	isCompleted: boolean;
-	onMarkCompleted: () => void;
-	onMarkNotCompleted: () => void;
-}
+import type { HabitTrackerProps } from "../../types";
 
 function HabitTracker({
 	habitName,
 	isCompleted,
 	onMarkCompleted,
 	onMarkNotCompleted,
+	onRemove,
+	habitId,
 }: HabitTrackerProps) {
 	return (
 		<div className="habit-card">
@@ -20,6 +16,12 @@ function HabitTracker({
 				<div
 					className={`status-indicator ${isCompleted ? "completed" : "not-completed"}`}
 				></div>
+				<button
+					className="remove-habit-button"
+					onClick={() => onRemove(habitId)}
+				>
+					x
+				</button>
 			</div>
 			<div className="action-buttons">
 				<button onClick={onMarkCompleted}>Mark as Completed</button>

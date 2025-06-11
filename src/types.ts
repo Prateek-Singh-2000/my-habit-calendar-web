@@ -10,3 +10,12 @@ export interface DailyCompletion {
 export interface HabitTracking {
 	[dateId: string]: DailyCompletion;
 }
+
+export interface HabitTrackerProps {
+	habitName: string;
+	isCompleted: boolean;
+	onMarkCompleted: () => void;
+	onMarkNotCompleted: () => void;
+	onRemove: (habitId: string) => void;
+	habitId: string;
+}

@@ -12,9 +12,7 @@ import {
 } from "./utils/dateUtils";
 
 function App() {
-	const [habits, setHabit] = useState<Habit[]>([
-		{ id: "1", name: "Drink 8 glasses of water" },
-	]);
+	const [habits, setHabit] = useState<Habit[]>([]);
 
 	// 2. Set state for current user for all days their habits are tracked
 	const [habitStorage, setHabitTracking] = useState<HabitTracking>({});
@@ -26,7 +24,6 @@ function App() {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
 	const toggleModalButton = (isOpen: boolean): void => {
-		console.log(`Trieggered modal to change to ${isOpen}`);
 		setIsModalOpen(isOpen);
 	};
 
@@ -41,6 +38,26 @@ function App() {
 
 		setHabit((prev) => [...prev, newHabit]);
 		setIsModalOpen(false);
+	};
+	const removeHabit = (habitId: string): void => {
+		if (!window.confirm(`Are you sure you want to remove this habit?`)) {
+			// do not remove the habit
+			return;
+		}
+
+		// continue to remove the habit
+		setHabit((prev) => prev.filter((habit) => habit.id != habitId));
+
+		// Remove tracking habit data from all days
+		setHabitTracking((prevStorage) => {
+			const newStorage: HabitTracking = {};
+			for (const date in prevStorage) {
+				const { [habitId]: remove, ...newStorageElement } = prevStorage[date];
+				newStorage[date] = newStorageElement;
+			}
+			return newStorage;
+		});
+		console.log(habitStorage);
 	};
 
 	const toggleHabitStatus = (habitId: string, changedStatus: boolean): void => {
@@ -92,6 +109,8 @@ function App() {
 						isCompleted={getHabitCompletionStatus(habit.id)}
 						onMarkCompleted={() => toggleHabitStatus(habit.id, true)}
 						onMarkNotCompleted={() => toggleHabitStatus(habit.id, false)}
+						onRemove={removeHabit}
+						habitId={habit.id}
 					></HabitTracker>
 				))}
 			</div>
