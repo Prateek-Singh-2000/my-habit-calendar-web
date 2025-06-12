@@ -81,18 +81,3 @@
 	transform: translateY(-2px);
 }
 
-/* modal overlay css code */
-.modal-backdrop {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 50vw;
-	height: 50vh;
-	background-color: rgba(255, 255, 255, 0.5);
-	color: black;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 1000;
-}
