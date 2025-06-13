@@ -58,7 +58,6 @@ function App() {
       }
       return newStorage;
     });
-    console.log(habitStorage);
   };
 
   const toggleHabitStatus = (habitId: string, changedStatus: boolean): void => {
@@ -106,6 +105,7 @@ function App() {
       <div className="habits-list-container">
         {habits.map((habit) => (
           <HabitTracker
+            key={habit.id}
             habitName={habit.name}
             isCompleted={getHabitCompletionStatus(habit.id)}
             onMarkCompleted={() => toggleHabitStatus(habit.id, true)}
