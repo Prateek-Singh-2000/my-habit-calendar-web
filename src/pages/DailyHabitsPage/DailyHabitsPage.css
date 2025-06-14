@@ -1,0 +1,73 @@
+
+.date-navigation {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	margin-bottom: 25px;
+	background-color: #e9ecef;
+	padding: 10px 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.date-navigation h2 {
+	margin: 0;
+	/* Remove default margin from h2 */
+	font-size: 1.6em;
+	color: #343a40;
+	min-width: 280px;
+	/* Give enough space for long date formats */
+	text-align: center;
+}
+
+.date-navigation button {
+	padding: 8px 15px;
+	font-size: 1em;
+	background-color: #6c757d;
+	color: white;
+}
+
+.date-navigation button:hover {
+	background-color: #5a6268;
+}
+
+.habits-list-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	max-width: 600px;
+	margin-top: 20px;
+}
+
+.add-habit-btn {
+	background-color: #28a745;
+	color: white;
+	font-size: 1.5em;
+	border: none;
+	border-radius: 50%;
+	width: 80px;
+	height: 80px;
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	z-index: 1000;
+	transition:
+		background-color 0.2s ease,
+		transform 0.2s ease;
+	padding: 0;
+	min-width: 60px;
+	min-height: 60px;
+	max-width: 60px;
+	max-height: 60px;
+	box-sizing: border-box;
+	flex-shrink: 0;
+}
+
+.add-habit-btn:hover {
+	cursor: pointer;
+	background-color: #1e7733;
+	transform: translateY(-2px);
+}
+
