@@ -1,4 +1,5 @@
 import "./ProfilePage.css";
+import { Link } from "react-router-dom";
 
 function ProfilePage() {
 	// Hard code values for now
@@ -7,6 +8,7 @@ function ProfilePage() {
 	const userPhotoUrl = "https://avatar.iran.liara.run/public/48";
 	return (
 		<div className="profile-page">
+			<Link to="/">Go Back</Link>
 			<h1>Profile Page</h1>
 			<div className="profile-information">
 				<img src={userPhotoUrl} alt="Profile" className="profile-photo" />

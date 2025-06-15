@@ -5,7 +5,7 @@ import "./App.css";
 
 function App() {
 	return (
-		<div className="app-container">
+		<>
 			<div className="global-nav">
 				<Link to="/" className="nav-link">
 					Daily Habits
@@ -14,12 +14,14 @@ function App() {
 					Profile
 				</Link>
 			</div>
-			<Routes>
-				<Route path="/" element={<DailyHabitsPage />} />
-				<Route path="/profile" element={<ProfilePage />} />
-				<Route path="*" element={<h2>404 - Page Not Found</h2>} />
-			</Routes>
-		</div>
+			<div className="app-container">
+				<Routes>
+					<Route path="/" element={<DailyHabitsPage />} />
+					<Route path="/profile" element={<ProfilePage />} />
+					<Route path="*" element={<h2>404 - Page Not Found</h2>} />
+				</Routes>
+			</div>
+		</>
 	);
 }
 
