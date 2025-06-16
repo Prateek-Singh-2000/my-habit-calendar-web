@@ -5,13 +5,13 @@
 	gap: 30px;
 	padding: 15px 0;
 	margin-bottom: 25px;
-	background-color: #fff;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+	background-color: var(--bg-secondary);
+	box-shadow: 0 2px 4px var(--shadow);
 }
 
 .nav-link {
 	text-decoration: none;
-	color: #007bff;
+	color: var(--accent-color);
 	font-weight: bold;
 	font-size: 1.1em;
 	padding: 5px 10px;
@@ -22,7 +22,7 @@
 }
 
 .nav-link:hover {
-	background-color: #f0f0f0;
+	background-color: #339af0;
 	color: #0056b3;
 }
 
