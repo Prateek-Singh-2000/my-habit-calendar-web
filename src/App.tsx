@@ -7,9 +7,6 @@ function App() {
 	return (
 		<>
 			<div className="global-nav">
-				<Link to="/" className="nav-link">
-					Daily Habits
-				</Link>
 				<Link to="/profile" className="nav-link">
 					Profile
 				</Link>
